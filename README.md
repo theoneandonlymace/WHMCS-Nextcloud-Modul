@@ -1,25 +1,25 @@
 # WHMCS Nextcloud Provisioning Module
 
-## Überblick
+## Overview
 
-Dieses WHMCS-Provisioning-Modul ermöglicht die automatische Verwaltung von Nextcloud-Benutzerkonten über die [OCS Provisioning API](https://docs.nextcloud.com/server/latest/admin_manual/configuration_user/user_provisioning_api.html).
+This WHMCS provisioning module enables automated management of Nextcloud user accounts via the [OCS Provisioning API](https://docs.nextcloud.com/server/latest/admin_manual/configuration_user/user_provisioning_api.html).
 
-### Funktionen
+### Features
 
-- **Benutzer erstellen** – Automatische Erstellung eines Nextcloud-Accounts bei Bestellung
-- **Gruppenzuweisung** – Automatische Zuweisung zu einer konfigurierbaren Nextcloud-Gruppe (wird bei Bedarf erstellt)
-- **Quota-Management** – Speicherplatz wird gemäß gebuchtem Paket gesetzt
-- **Paketänderung** – Quota wird bei Up-/Downgrade automatisch angepasst
-- **Suspend/Unsuspend** – Benutzer wird bei Zahlungsverzug deaktiviert und bei Zahlung wieder aktiviert
-- **Kündigung** – Konfigurierbar: Benutzer löschen oder deaktivieren
-- **Passwortänderung** – Unterstützung für Passwortänderungen über WHMCS
-- **Client Area** – Zeigt gebuchten und genutzten Speicherplatz mit Fortschrittsbalken
-- **Nextcloud-Link** – Direktlink zur Nextcloud-Instanz im Kundenbereich
-- **E-Mail-Sync** – E-Mail-Adresse wird bei Profiländerungen an Nextcloud übertragen
+- **User Creation** – Automatically creates a Nextcloud account when an order is placed
+- **Group Assignment** – Automatically assigns users to a configurable Nextcloud group (created if it doesn't exist)
+- **Quota Management** – Storage quota is set according to the ordered package
+- **Package Changes** – Quota is automatically adjusted on upgrade/downgrade
+- **Suspend/Unsuspend** – User is disabled on payment failure and re-enabled on payment
+- **Termination** – Configurable: delete or disable the user
+- **Password Change** – Supports password changes via WHMCS
+- **Client Area** – Displays booked and used storage with a progress bar
+- **Nextcloud Link** – Direct link to the Nextcloud instance in the client area
+- **Email Sync** – Email address is synced to Nextcloud when the client profile is updated
 
 ## Installation
 
-1. Den Ordner `modules/servers/nextcloud/` in das WHMCS-Installationsverzeichnis kopieren:
+1. Copy the `modules/servers/nextcloud/` folder into your WHMCS installation directory:
 
 ```
 whmcs/modules/servers/nextcloud/
@@ -32,48 +32,48 @@ whmcs/modules/servers/nextcloud/
 └── nextcloud.php
 ```
 
-2. In WHMCS unter **Setup → Products/Services → Servers** einen neuen Server anlegen:
+2. In WHMCS, go to **Setup → Products/Services → Servers** and create a new server:
    - **Type**: Nextcloud
-   - **Hostname**: Ihre Nextcloud-Domain (z.B. `cloud.example.com`)
-   - **Username**: Nextcloud-Admin-Benutzername
-   - **Password**: Nextcloud-Admin-Passwort
-   - **Secure**: Anhaken für HTTPS (empfohlen)
-   - Klicken Sie auf **Test Connection** um die Verbindung zu prüfen
+   - **Hostname**: Your Nextcloud domain (e.g. `cloud.example.com`)
+   - **Username**: Nextcloud admin username
+   - **Password**: Nextcloud admin password
+   - **Secure**: Check for HTTPS (recommended)
+   - Click **Test Connection** to verify the connection
 
-3. Ein Produkt erstellen unter **Setup → Products/Services → Products/Services**:
-   - **Module Settings** Tab:
+3. Create a product under **Setup → Products/Services → Products/Services**:
+   - **Module Settings** tab:
      - **Module Name**: Nextcloud
-     - **Server**: Den zuvor erstellten Server auswählen
-     - **Quota**: Speicherplatz eingeben (z.B. `5 GB`, `50 GB`, `1 TB`)
-     - **Gruppenname**: Nextcloud-Gruppenname (optional)
-     - **Termination**: Verhalten bei Kündigung wählen
-   - **Custom Fields** Tab:
-     - Feld erstellen: **Feldname** = `Nextcloud Username`, **Typ** = Text, **Required** = Ja
-     - Feld erstellen: **Feldname** = `Nextcloud Password`, **Typ** = Password, **Required** = Ja
+     - **Server**: Select the server created above
+     - **Quota**: Enter storage quota (e.g. `5 GB`, `50 GB`, `1 TB`)
+     - **Group Name**: Nextcloud group name (optional)
+     - **Termination**: Choose termination behavior
+   - **Custom Fields** tab:
+     - Create field: **Field Name** = `Nextcloud Username`, **Type** = Text, **Required** = Yes
+     - Create field: **Field Name** = `Nextcloud Password`, **Type** = Password, **Required** = Yes
 
-## Konfigurationsoptionen
+## Configuration Options
 
-| Option | Beschreibung | Beispiel |
-|--------|-------------|----------|
-| Quota | Speicherplatz für den Nextcloud-Benutzer | `5 GB`, `50 GB`, `1 TB` |
-| Gruppenname | Nextcloud-Gruppe für die Benutzerzuweisung | `Premium-Users` |
-| Termination | Verhalten bei Kündigung | `disable` oder `delete` |
+| Option | Description | Example |
+|--------|-------------|---------|
+| Quota | Storage space for the Nextcloud user | `5 GB`, `50 GB`, `1 TB` |
+| Group Name | Nextcloud group for user assignment | `Premium-Users` |
+| Termination | Behavior on service termination | `disable` or `delete` |
 
-## Voraussetzungen
+## Requirements
 
-- WHMCS 7.0 oder höher
-- PHP 7.2 oder höher mit cURL-Erweiterung
-- Nextcloud-Server mit aktivierter OCS Provisioning API
-- Ein Nextcloud-Admin-Account für die API-Zugriffe
+- WHMCS 7.0 or higher
+- PHP 7.2 or higher with the cURL extension
+- Nextcloud server with the OCS Provisioning API enabled
+- A Nextcloud admin account for API access
 
-## Nextcloud-Anforderungen
+## Nextcloud Requirements
 
-Die OCS Provisioning API muss auf dem Nextcloud-Server erreichbar sein. Stellen Sie sicher, dass:
+The OCS Provisioning API must be reachable on the Nextcloud server. Make sure that:
 
-- Der Nextcloud-Server über HTTPS erreichbar ist
-- Ein Admin-Benutzer mit vollen Rechten existiert
-- Die Provisioning API nicht durch Firewall-Regeln blockiert wird
+- The Nextcloud server is accessible via HTTPS
+- An admin user with full privileges exists
+- The Provisioning API is not blocked by firewall rules
 
-## Lizenz
+## License
 
 MIT License
