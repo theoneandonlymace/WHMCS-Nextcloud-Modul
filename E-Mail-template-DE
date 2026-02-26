@@ -1,0 +1,46 @@
+Hallo {$client_name},
+Bitte lies diese E-Mail vollständig und bewahre sie für deine Unterlagen auf.
+
+vielen Dank für deine Bestellung! Dein Nextcloud Cloud-Speicher wurde erfolgreich eingerichtet. In dieser E-Mail findest du alle wichtigen Informationen, um sofort loslegen zu können.
+Deine Nextcloud-Zugangsdaten
+
+Nextcloud-URL: {$service_domain}
+Benutzername: {$service_username}
+Passwort: Das von dir bei der Bestellung gewählte Passwort
+Speicherplatz: {$service_product_name}
+Erste Schritte
+
+1. Öffne deine Nextcloud unter {$service_domain}
+2. Melde dich mit deinem Benutzernamen und Passwort an
+3. Du kannst sofort Dateien hochladen, Ordner erstellen und Inhalte teilen
+
+Tipp: Lade dir die Nextcloud-App für Desktop oder Smartphone herunter, um deine Dateien automatisch zu synchronisieren:
+https://nextcloud.com/install/#install-clients
+Passwort ändern
+
+Du kannst dein Passwort jederzeit direkt in Nextcloud ändern:
+"Einstellungen" > "Sicherheit" > "Passwort ändern"
+
+Stelle sicher, dass die in deinem Profil hinterlegte E-Mail-Adresse aktuell ist, damit du bei Bedarf dein Passwort zurücksetzen kannst.
+Speicherplatz verwalten
+
+Deinen aktuellen Speicherverbrauch kannst du jederzeit einsehen:
+- In Nextcloud: Unten links in der Seitenleiste
+- Im Kundencenter: "Dienste" > "{$service_product_name}"
+
+Benötigst du mehr Speicherplatz? Im Kundencenter kannst du jederzeit ein Upgrade durchführen.
+Abrechnungsinformationen
+
+Erstzahlung: {$service_first_payment_amount}
+Wiederkehrender Betrag: {$service_recurring_amount}
+Abrechnungszeitraum: {$service_billing_cycle}
+Nächste Verlängerung am: {$service_next_due_date}
+Wichtiger Hinweis
+
+Bitte bewahre deine Zugangsdaten sicher auf. Aus Sicherheitsgründen können wir dein Passwort nicht wiederherstellen.
+Bei offenen Fragen steht dir unser Support jederzeit zur Verfügung.
+
+Vielen Dank, dass du dich für HexaHost entschieden hast.
+Viel Freude mit deinem neuen Cloud-Speicher!
+
+{$signature}

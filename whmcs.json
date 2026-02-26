@@ -1,0 +1,27 @@
+{
+    "schema": "1.0",
+    "type": "whmcs-servers",
+    "name": "nextcloud",
+    "license": "MIT",
+    "category": "provisioning",
+    "description": {
+        "name": "Nextcloud Provisioning Module",
+        "tagline": "Automatische Verwaltung von Nextcloud-Benutzerkonten über WHMCS.",
+        "long": "Dieses Modul ermöglicht die vollautomatische Provisionierung von Nextcloud-Benutzerkonten über die OCS Provisioning API. Es unterstützt das Erstellen, Suspendieren, Entsperren und Löschen von Benutzern, Quota-Verwaltung, Gruppenzuweisung sowie eine Kundenbereich-Ansicht mit Speicherplatz-Anzeige.",
+        "features": [
+            "Automatische Benutzer-Erstellung mit Quota und Gruppenzuweisung",
+            "Suspend/Unsuspend über Nextcloud User-Enable/Disable",
+            "Paketänderungen mit automatischer Quota-Anpassung",
+            "Client Area mit Live-Quota-Anzeige und Fortschrittsbalken",
+            "Direktlink zur Nextcloud-Instanz im Kundenbereich",
+            "E-Mail-Synchronisation bei Profiländerungen"
+        ]
+    },
+    "logo": {
+        "filename": "logo.png"
+    },
+    "support": {
+        "docs_url": "https://docs.nextcloud.com/server/latest/admin_manual/configuration_user/user_provisioning_api.html"
+    },
+    "authors": []
+}

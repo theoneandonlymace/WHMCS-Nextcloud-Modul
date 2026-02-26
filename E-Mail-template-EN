@@ -1,0 +1,46 @@
+Hello {$client_name},
+Please read this email carefully and keep it for your records.
+
+Thank you for your order! Your Nextcloud cloud storage has been successfully set up. This email contains all the information you need to get started right away.
+Your Nextcloud Credentials
+
+Nextcloud URL: {$service_domain}
+Username: {$service_username}
+Password: The password you chose during checkout
+Storage: {$service_product_name}
+Getting Started
+
+1. Open your Nextcloud at {$service_domain}
+2. Log in with your username and password
+3. You can immediately upload files, create folders, and share content
+
+Tip: Download the Nextcloud app for desktop or mobile to automatically sync your files:
+https://nextcloud.com/install/#install-clients
+Changing Your Password
+
+You can change your password at any time directly in Nextcloud:
+"Settings" > "Security" > "Change password"
+
+Make sure the email address in your profile is up to date so you can reset your password if needed.
+Managing Your Storage
+
+You can check your current storage usage at any time:
+- In Nextcloud: Bottom left of the sidebar
+- In the client area: "Services" > "{$service_product_name}"
+
+Need more storage? You can upgrade your plan at any time through the client area.
+Billing Information
+
+First Payment: {$service_first_payment_amount}
+Recurring Amount: {$service_recurring_amount}
+Billing Cycle: {$service_billing_cycle}
+Next Renewal: {$service_next_due_date}
+Important Notice
+
+Please keep your credentials in a safe place. For security reasons, we are unable to recover your password.
+If you have any questions, our support team is always happy to help.
+
+Thank you for choosing HexaHost.
+Enjoy your new cloud storage!
+
+{$signature}
