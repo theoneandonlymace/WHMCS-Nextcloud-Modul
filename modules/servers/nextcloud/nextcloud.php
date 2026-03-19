@@ -35,22 +35,22 @@ function nextcloud_ConfigOptions()
             'Type' => 'text',
             'Size' => '10',
             'Default' => '5 GB',
-            'Description' => 'Speicherplatz (z.B. "5 GB", "50 GB", "1 TB")',
+            'Description' => 'Quota (z.B. "5 GB", "50 GB", "1 TB")',
         ],
         'Gruppenname' => [
             'Type' => 'text',
             'Size' => '25',
             'Default' => '',
-            'Description' => 'Nextcloud-Gruppe, der User zugewiesen werden (leer = keine Gruppe)',
+            'Description' => 'Nextcloud group to which the user is assigned (empty = no group)',
         ],
         'Termination' => [
             'Type' => 'dropdown',
             'Options' => [
-                'disable' => 'Benutzer deaktivieren (Daten bleiben)',
-                'delete' => 'Benutzer löschen (Daten weg)',
+                'disable' => 'Deactivate user (data remains)',
+                'delete' => 'Delete user (data will be deleted)',
             ],
-            'Default' => 'disable',
-            'Description' => 'Verhalten bei Kündigung',
+            'Default' => 'enable',
+            'Description' => 'What to do if terminated',
         ],
     ];
 }
@@ -88,7 +88,7 @@ function nextcloud_resolveUsername(array $params): string
         }
     }
 
-    throw new \Exception('Nextcloud-Benutzername nicht gefunden. Bitte Custom Field "Nextcloud Username" am Produkt anlegen.');
+    throw new \Exception('Nextcloud username not found. Please create a custom field named “Nextcloud Username” for the product.';
 }
 
 /**
@@ -109,7 +109,7 @@ function nextcloud_resolvePassword(array $params): string
         return $params['password'];
     }
 
-    throw new \Exception('Kein Passwort gesetzt. Bitte Custom Field "Nextcloud Password" am Produkt anlegen oder das Passwortfeld im Details-Tab aktivieren.');
+    throw new \Exception('No password has been set. Please create a custom field named “Nextcloud Password” for the product or enable the password field in the Details tab.');
 }
 
 /**
@@ -128,7 +128,7 @@ function nextcloud_TestConnection(array $params)
         $api = nextcloud_buildApi($params);
         $api->testConnection();
 
-        logModuleCall('nextcloud', __FUNCTION__, $params, 'Verbindung erfolgreich');
+        logModuleCall('nextcloud', __FUNCTION__, $params, 'Connection successful');
 
         return ['success' => true, 'error' => ''];
     } catch (\Exception $e) {
@@ -164,7 +164,7 @@ function nextcloud_CreateAccount(array $params)
             // serviceProperties may not be available in all contexts
         }
 
-        logModuleCall('nextcloud', __FUNCTION__, $params, "Benutzer '{$username}' erstellt");
+        logModuleCall('nextcloud', __FUNCTION__, $params, "User ‘{$username}’ has been created");
     } catch (\Exception $e) {
         logModuleCall('nextcloud', __FUNCTION__, $params, $e->getMessage(), $e->getTraceAsString());
         return $e->getMessage();
@@ -181,7 +181,7 @@ function nextcloud_SuspendAccount(array $params)
 
         $api->disableUser($username);
 
-        logModuleCall('nextcloud', __FUNCTION__, $params, "Benutzer '{$username}' deaktiviert");
+        logModuleCall('nextcloud', __FUNCTION__, $params, "User ‘{$username}’ has been deactivated");
     } catch (\Exception $e) {
         logModuleCall('nextcloud', __FUNCTION__, $params, $e->getMessage(), $e->getTraceAsString());
         return $e->getMessage();
@@ -198,7 +198,7 @@ function nextcloud_UnsuspendAccount(array $params)
 
         $api->enableUser($username);
 
-        logModuleCall('nextcloud', __FUNCTION__, $params, "Benutzer '{$username}' aktiviert");
+        logModuleCall('nextcloud', __FUNCTION__, $params, "User ‘{$username}’ has been activated");
     } catch (\Exception $e) {
         logModuleCall('nextcloud', __FUNCTION__, $params, $e->getMessage(), $e->getTraceAsString());
         return $e->getMessage();
@@ -216,10 +216,10 @@ function nextcloud_TerminateAccount(array $params)
 
         if ($action === 'delete') {
             $api->deleteUser($username);
-            logModuleCall('nextcloud', __FUNCTION__, $params, "Benutzer '{$username}' gelöscht");
+            logModuleCall('nextcloud', __FUNCTION__, $params, "User ‘{$username}’ deleted");
         } else {
             $api->disableUser($username);
-            logModuleCall('nextcloud', __FUNCTION__, $params, "Benutzer '{$username}' deaktiviert (Terminate)");
+            logModuleCall('nextcloud', __FUNCTION__, $params, "User ‘{$username}’ has been deactivated (Terminate)");
         }
     } catch (\Exception $e) {
         logModuleCall('nextcloud', __FUNCTION__, $params, $e->getMessage(), $e->getTraceAsString());
@@ -237,7 +237,7 @@ function nextcloud_ChangePackage(array $params)
         $newQuota = $params['configoption1'] ?? '';
 
         if ($newQuota === '') {
-            throw new \Exception('Kein Quota im neuen Paket konfiguriert.');
+            throw new \Exception('No quota is configured in the new package.');
         }
 
         $api->editUser($username, 'quota', $newQuota);
@@ -248,7 +248,7 @@ function nextcloud_ChangePackage(array $params)
             $api->addUserToGroup($username, $newGroup);
         }
 
-        logModuleCall('nextcloud', __FUNCTION__, $params, "Quota für '{$username}' auf '{$newQuota}' geändert");
+        logModuleCall('nextcloud', __FUNCTION__, $params, "Quota for ‘{$username}’ changed to '{$newQuota}'");
     } catch (\Exception $e) {
         logModuleCall('nextcloud', __FUNCTION__, $params, $e->getMessage(), $e->getTraceAsString());
         return $e->getMessage();
@@ -265,12 +265,12 @@ function nextcloud_ChangePassword(array $params)
         $newPassword = $params['password'];
 
         if (empty($newPassword)) {
-            throw new \Exception('Kein neues Passwort angegeben.');
+            throw new \Exception('No new password was entered.');
         }
 
         $api->editUser($username, 'password', $newPassword);
 
-        logModuleCall('nextcloud', __FUNCTION__, $params, "Passwort für '{$username}' geändert");
+        logModuleCall('nextcloud', __FUNCTION__, $params, "Password for ‘{$username}’ has been changed");
     } catch (\Exception $e) {
         logModuleCall('nextcloud', __FUNCTION__, $params, $e->getMessage(), $e->getTraceAsString());
         return $e->getMessage();
@@ -294,12 +294,12 @@ function nextcloud_AdminServicesTabFields(array $params)
 
         return [
             'Nextcloud User' => $username,
-            'E-Mail' => $user['email'] ?? '-',
-            'Aktiviert' => ($user['enabled'] ?? false) ? 'Ja' : 'Nein',
-            'Quota gebucht' => nextcloud_formatBytes($total),
-            'Quota genutzt' => nextcloud_formatBytes($used) . " ({$relative}%)",
-            'Quota frei' => nextcloud_formatBytes($free),
-            'Gruppen' => implode(', ', $user['groups'] ?? []),
+            'Email' => $user['email'] ?? '-',
+            'Enabled' => ($user['enabled'] ?? false) ? 'Ja' : 'Nein',
+            'Quota booked' => nextcloud_formatBytes($total),
+            'Quota used' => nextcloud_formatBytes($used) . " ({$relative}%)",
+            'Free quota' => nextcloud_formatBytes($free),
+            'Groups' => implode(', ', $user['groups'] ?? []),
             'Nextcloud URL' => nextcloud_getBaseUrl($params),
         ];
     } catch (\Exception $e) {
